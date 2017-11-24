@@ -26,4 +26,19 @@ public class ReverseAStringTest {
         assertEquals("xoBrettO", ReverseAString.reverseCollection8("OtterBox"));
     }
 
+    @Test
+    public void reverseJavaScriptSplitJoin() throws Exception {
+        assertEquals("xoBrettO", ReverseAString.reverseJavaScript("OtterBox", "reverseStringSplitJoin"));
+    }
+
+    @Test
+    public void reverseJavaScriptForLoop() throws Exception {
+        assertEquals("xoBrettO", ReverseAString.reverseJavaScript("OtterBox", "reverseStringForLoop"));
+    }
+
+    @Test
+    public void reverseJavaScriptReduce() throws Exception {
+        assertEquals("xoBrettO", ReverseAString.reverseJavaScript("OtterBox", "reverseStringReduce"));
+    }
+
 }
