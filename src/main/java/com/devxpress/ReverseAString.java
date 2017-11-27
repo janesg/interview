@@ -11,6 +11,11 @@ import java.util.stream.Collectors;
 
 public class ReverseAString {
 
+    public static String reverseStringBuilder(String str) {
+
+        return new StringBuilder(str).reverse().toString();
+    }
+
     public static String reverseForLoop(String str) {
         StringBuilder sb = new StringBuilder();
 

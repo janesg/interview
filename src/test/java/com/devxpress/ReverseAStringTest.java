@@ -6,6 +6,11 @@ import static org.junit.Assert.*;
 
 public class ReverseAStringTest {
     @Test
+    public void reverseStringBuilder() throws Exception {
+        assertEquals("xoBrettO", ReverseAString.reverseStringBuilder("OtterBox"));
+    }
+
+    @Test
     public void reverseForLoop() throws Exception {
         assertEquals("xoBrettO", ReverseAString.reverseForLoop("OtterBox"));
     }
