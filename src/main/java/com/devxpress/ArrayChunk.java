@@ -42,6 +42,25 @@ public class ArrayChunk {
         return result;
     }
 
+    public static int[][] arrayChunkArrayCopy(int[] array, int size) {
+
+        int remainder = array.length % size;
+        int numSubArrays = remainder > 0 ? (array.length / size) + 1 : (array.length / size) ;
+
+        int[][] result = new int[numSubArrays][];
+
+        for (int idx = 0, i = 0; idx < array.length; ) {
+            int copyLen = (array.length - idx) < size ? remainder : size;
+            int[] chunk = new int[copyLen];
+            System.arraycopy(array, idx, chunk, 0, copyLen);
+            result[i] = chunk;
+            idx += copyLen;
+            i++;
+        }
+
+        return result;
+    }
+
     public static int[][] arrayChunkJavaScript(int[] array, int size, String functionName) throws Exception {
 
         ScriptEngineManager manager = new ScriptEngineManager();
