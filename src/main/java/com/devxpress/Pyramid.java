@@ -8,41 +8,46 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-public class Steps {
+public class Pyramid {
 
-    public static String[] stepsIterative(int num) {
+    public static String[] pyramidIterative(int num) {
 
         String[] results = new String[num];
+        int stringSize = (2 * num) - 1;
+        int midIdx = stringSize / 2;
 
-        for (int i = 0; i < num; i++) {
-            char[] chars = new char[num];
-            Arrays.fill(chars, 0, i + 1, '#');
-            Arrays.fill(chars, i + 1, num, ' ');
+        for (int i = 0; i < num ; i++) {
+            char[] chars = new char[stringSize];
+            Arrays.fill(chars, 0, midIdx - i, ' ');
+            Arrays.fill(chars, midIdx - i, midIdx + 1 + i, '#');
+            Arrays.fill(chars, midIdx + 1 + i, stringSize, ' ');
             results[i] = String.valueOf(chars);
         }
 
         return results;
     }
 
-    public static String[] stepsRecursive(int num) {
+    public static String[] pyramidRecursive(int num) {
 
-        return stepHelper(new String[num], num);
+        return recursionHelper(new String[num], num);
     }
 
-    private static String[] stepHelper(String[] arr, int num) {
-        if (num == 0) {
-            return arr;
-        } else {
-            // The next array index to fill is equivalent to the number of steps created so far
-            // These can only be detected by looking for non-null array elements since length is fixed @ num
-            int idx = getLength(arr);
-            char[] chars = new char[num + idx];
-            Arrays.fill(chars, 0, idx + 1, '#');
-            Arrays.fill(chars, idx + 1, num + idx, ' ');
-            arr[idx] = String.valueOf(chars);
-
-            return stepHelper(arr, num - 1);
+    private static String[] recursionHelper(String[] strArr, int num) {
+        if (num <= 0) {
+            return strArr;
         }
+
+        int arrSize = getLength(strArr);
+        int stringSize = (2 * (num + arrSize)) - 1;
+        int midIdx = stringSize / 2;
+
+        char[] chars = new char[stringSize];
+        Arrays.fill(chars, 0, midIdx - arrSize, ' ');
+        Arrays.fill(chars, midIdx - arrSize, midIdx + 1 + arrSize, '#');
+        Arrays.fill(chars, midIdx + 1 + arrSize, stringSize, ' ');
+        strArr[arrSize] = String.valueOf(chars);
+
+        return recursionHelper(strArr, num - 1);
     }
 
     private static int getLength(String[] arr) {
@@ -56,7 +61,7 @@ public class Steps {
         return count;
     }
 
-    public static String[] stepsJavaScript(int num, String functionName) throws Exception {
+    public static String[] pyramidJavaScript(int num, String functionName) throws Exception {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
@@ -71,7 +76,7 @@ public class Steps {
         try (BufferedReader reader =
                      new BufferedReader(
                              new InputStreamReader(
-                                     loader.getResourceAsStream("js/steps.js")))) {
+                                     loader.getResourceAsStream("js/pyramid.js")))) {
             engine.eval(reader);
         } catch (IOException e) {
             throw new RuntimeException("Failed to read JavaScript file: " + e.getMessage());
