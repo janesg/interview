@@ -4,15 +4,15 @@ function Queue() {
 
 Queue.prototype.add = function(x) {
     this.data.unshift(x);
-}
+};
 
 Queue.prototype.remove = function() {
     return this.data.pop();
-}
+};
 
 Queue.prototype.peek = function() {
     return this.data[this.data.length - 1];
-}
+};
 
 // ES6 using class
 // class Queue {
@@ -26,6 +26,10 @@ Queue.prototype.peek = function() {
 //
 //     remove() {
 //         return this.data.pop();
+//     }
+//
+//     peek() {
+//         return this.data[this.data.length - 1];
 //     }
 // }
 
