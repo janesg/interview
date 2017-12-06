@@ -1,19 +1,31 @@
 package com.devxpress;
 
+import java.util.function.BiFunction;
+
 public class LinkedList<T> {
 
     private Node<T> head = null;
     private int size = 0;
 
     public void addFirst(T data) {
+        this.head = new Node<>(data, this.head);
+        this.size++;
+    }
+
+    public void addLast(T data) {
         Node<T> newNode = new Node<>(data);
 
-        // Add new node before current head
+        // Check for empty list
         if (this.head == null) {
             this.head = newNode;
         } else {
-            newNode.next = this.head;
-            this.head = newNode;
+            Node<T> n = this.head;
+
+            while (n.next != null) {
+                n = n.next;
+            }
+
+            n.next = newNode;
         }
 
         this.size++;
@@ -86,25 +98,6 @@ public class LinkedList<T> {
         return result;
     }
 
-    public void addLast(T data) {
-        Node<T> newNode = new Node<>(data);
-
-        // Check for empty list
-        if (this.head == null) {
-            this.head = newNode;
-        } else {
-            Node<T> n = this.head;
-
-            while (n.next != null) {
-                n = n.next;
-            }
-
-            n.next = newNode;
-        }
-
-        this.size++;
-    }
-
     public T get(int index) {
         if (!isElementIndex(index)) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size);
@@ -170,13 +163,88 @@ public class LinkedList<T> {
             beforeAdd = beforeAdd.next;
         }
 
-        Node<T> newNode = new Node<T>(data);
+        Node<T> newNode = new Node<>(data);
         Node<T> afterAdd = beforeAdd.next;
         beforeAdd.next = newNode;
         newNode.next = afterAdd;
         this.size++;
+    }
 
-        return;
+    public void forEach(BiFunction<? super T, ? super Integer, ? extends T> f) {
+        Node<T> n = this.head;
+
+        for (int i = 0; i < this.size; i++) {
+            n.data = f.apply(n.data, i);
+            n = n.next;
+        }
+    }
+
+    public T mid() {
+        if (this.size == 0) {
+            return null;
+        }
+
+        Node<T> slow = this.head;
+        Node<T> fast = this.head;
+
+        // Checking fast pointer's next and next.next handles
+        // case for both odd and even number of elements.
+        // In case of even number of elements we want to return
+        // the element at the end of the first half.
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow.data;
+    }
+
+    // Note: an instance of this LinkedList class can never be circular
+    // because Node is a private class never exposed in the API.
+    // For the purposes of interview questions this is how it would be implemented
+    // if it were possible.
+    public boolean isCircular() {
+        if (this.size <= 1) {
+            return false;
+        }
+
+        Node<T> slow = this.head;
+        Node<T> fast = this.head.next;
+
+        while (fast.next != null && fast.next.next != null) {
+            if (slow.equals(fast)) {
+                return true;
+            }
+
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return false;
+    }
+
+    // Assumption is that offset should be less than size of list
+    public T fromLast(int offset) {
+        if (offset >= this.size) {
+            throw new IllegalArgumentException("Offset: " + offset + ", Size: " + this.size);
+        }
+
+        Node<T> slow = this.head;
+        Node<T> fast = this.head;
+
+        // Initialise by moving fast forward 'offset' nodes
+        for (int i = 0; i < offset; i++) {
+            fast = fast.next;
+        }
+
+        // Now advance both at same rate until fast looking at the end node
+        // At that point slow will be looking at the node required
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return slow.data;
     }
 
     private boolean isElementIndex(int idx) {
@@ -192,11 +260,11 @@ public class LinkedList<T> {
         private T data;
         private Node<T> next;
 
-        public Node(T data) {
+        Node(T data) {
             this(data, null);
         }
 
-        public Node(T data, Node<T> next) {
+        Node(T data, Node<T> next) {
             this.data = data;
             this.next = next;
         }

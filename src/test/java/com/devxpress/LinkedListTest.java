@@ -219,14 +219,91 @@ public class LinkedListTest {
         assertEquals(1, linked.size());
         linked.add("Cockles", 1);
         assertEquals(2, linked.size());
-        linked.add("Muscles", 0);
+        linked.add("Mussels", 0);
         assertEquals(3, linked.size());
         linked.add("Winkles", 1);
         assertEquals(4, linked.size());
-        assertEquals("Muscles", linked.get(0));
+        assertEquals("Mussels", linked.get(0));
         assertEquals("Winkles", linked.get(1));
         assertEquals("Whelks", linked.get(2));
         assertEquals("Cockles", linked.get(3));
+    }
+
+    @Test
+    public void forEach() throws Exception {
+        LinkedList<String> linked = new LinkedList<>();
+
+        linked.addLast("Whelks");
+        linked.addLast("Cockles");
+        linked.addLast("Mussels");
+        linked.addLast("Winkles");
+        assertEquals(4, linked.size());
+
+        linked.forEach((data, idx) -> data + "_" + idx);
+
+        assertEquals("Whelks_0", linked.get(0));
+        assertEquals("Cockles_1", linked.get(1));
+        assertEquals("Mussels_2", linked.get(2));
+        assertEquals("Winkles_3", linked.get(3));
+    }
+
+    @Test
+    public void mid() throws Exception {
+        LinkedList<String> linked = new LinkedList<>();
+
+        assertNull(linked.mid());
+
+        linked.addLast("Whelks");
+        linked.addLast("Cockles");
+        linked.addLast("Mussels");
+
+        assertEquals("Cockles", linked.mid());
+
+        linked.addFirst("Winkles");
+
+        assertEquals("Whelks", linked.mid());
+    }
+
+    @Test
+    public void isCircular() throws Exception {
+        LinkedList<String> linked = new LinkedList<>();
+
+        assertFalse(linked.isCircular());
+
+        linked.addLast("Whelks");
+        linked.addLast("Cockles");
+        linked.addLast("Mussels");
+
+        assertFalse(linked.isCircular());
+
+        // **** I can't perform positive test as not possible to build circular linked list ****
+    }
+
+    @Test
+    public void fromLast() throws Exception {
+        LinkedList<String> linked = new LinkedList<>();
+
+        try {
+            linked.fromLast(0);
+            fail("Offset exceeding size should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Offset: 0, Size: 0", e.getMessage());
+        }
+
+        try {
+            linked.fromLast(1);
+            fail("Offset exceeding size should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Offset: 1, Size: 0", e.getMessage());
+        }
+
+        linked.addLast("Whelks");
+        linked.addLast("Cockles");
+        linked.addLast("Mussels");
+
+        assertEquals("Mussels", linked.fromLast(0));
+        assertEquals("Whelks", linked.fromLast(2));
+        assertEquals("Cockles", linked.fromLast(1));
     }
 
     @Test
