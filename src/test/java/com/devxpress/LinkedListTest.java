@@ -307,7 +307,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void addFirstJavaScript() throws Exception {
+    public void testJavaScript() throws Exception {
         linkedListJavaScript("testLinkedList");
     }
 
