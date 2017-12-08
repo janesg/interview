@@ -121,7 +121,7 @@ public class TreeTest {
         treeJavaScript("testTree");
     }
 
-    public static String treeJavaScript(String functionName) throws Exception {
+    public static Void treeJavaScript(String functionName) throws Exception {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
@@ -143,7 +143,7 @@ public class TreeTest {
         }
 
         // Call the JavaScript function by name passing source String as parameter
-        return (String) ((Invocable) engine).invokeFunction(functionName);
+        return (Void) ((Invocable) engine).invokeFunction(functionName);
     }
 
 }
