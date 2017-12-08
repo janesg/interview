@@ -1,5 +1,7 @@
 package com.devxpress;
 
+import org.junit.Test;
+
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -7,9 +9,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Queue {
+public class EventsTest {
 
-    public static String queueJavaScript(String functionName) throws Exception {
+    @Test
+    public void testJavaScript() throws Exception {
+        eventsJavaScript("testEvents");
+    }
+
+    private static Void eventsJavaScript(String functionName) throws Exception {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
@@ -24,14 +31,13 @@ public class Queue {
         try (BufferedReader reader =
                      new BufferedReader(
                              new InputStreamReader(
-                                     loader.getResourceAsStream("js/queue.js")))) {
+                                     loader.getResourceAsStream("js/events.js")))) {
             engine.eval(reader);
         } catch (IOException e) {
             throw new RuntimeException("Failed to read JavaScript file: " + e.getMessage());
         }
 
         // Call the JavaScript function by name passing source String as parameter
-        return (String) ((Invocable) engine).invokeFunction(functionName);
+        return (Void) ((Invocable) engine).invokeFunction(functionName);
     }
-
 }

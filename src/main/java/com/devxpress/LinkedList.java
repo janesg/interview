@@ -256,7 +256,7 @@ public class LinkedList<T> {
         return "{head: => " + (this.head == null ? "NULL" : this.head.toString()) + "}";
     }
 
-    private class Node<T> {
+    private static class Node<T> {
         private T data;
         private Node<T> next;
 

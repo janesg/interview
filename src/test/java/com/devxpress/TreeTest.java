@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class TreeTest {
 
     @Test
-    public void testTraverseBF() throws Exception {
+    public void testTraverseBF() {
 
         List<String> results = new ArrayList<>();
         List<String> expectedResults = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i");
@@ -41,7 +41,7 @@ public class TreeTest {
     }
 
     @Test
-    public void testTraverseDF() throws Exception {
+    public void testTraverseDF() {
 
         List<String> results = new ArrayList<>();
         List<String> expectedResults = Arrays.asList("a", "b", "e", "f", "g", "c", "d", "h", "i");
@@ -65,7 +65,7 @@ public class TreeTest {
     }
 
     @Test
-    public void testRemove() throws Exception {
+    public void testRemove() {
 
         List<String> results = new ArrayList<>();
         List<String> prevRemoveExpectedResults = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i");
@@ -95,7 +95,7 @@ public class TreeTest {
     }
 
     @Test
-    public void testLevelWidth() throws Exception {
+    public void testLevelWidth() {
 
         int[] expectedResults = new int[]{ 1, 3, 5 };
 
@@ -121,7 +121,7 @@ public class TreeTest {
         treeJavaScript("testTree");
     }
 
-    public static Void treeJavaScript(String functionName) throws Exception {
+    private static Void treeJavaScript(String functionName) throws Exception {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");

@@ -1,11 +1,5 @@
 package com.devxpress;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
@@ -133,38 +127,5 @@ public class Fibonacci {
     }
 
     private static final Function<Integer, Long> fibFunc = Fibonacci.memoize(Fibonacci::fibonacciHelperMemoFunc);
-
-    public static long fibonacciJavaScript(int num, String functionName) throws Exception {
-
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName("JavaScript");
-
-        if (!(engine instanceof Invocable)) {
-            throw new RuntimeException("Invoking methods is not supported.");
-        }
-
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-
-        // Get script from JS File on classpath (from resources)
-        try (BufferedReader reader =
-                     new BufferedReader(
-                             new InputStreamReader(
-                                     loader.getResourceAsStream("js/fibonacci.js")))) {
-            engine.eval(reader);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read JavaScript file: " + e.getMessage());
-        }
-
-        // Call the JavaScript function by name passing source String as parameter
-        // Returns an Integer unless value is too large in which case Double is returned
-        Object result = ((Invocable) engine).invokeFunction(functionName, num);
-
-        if (result instanceof Integer) {
-            return ((Integer) result).longValue();
-        }
-
-        // Otherwise a Double is returned
-        return ((Double) result).longValue();
-    }
 
 }

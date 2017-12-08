@@ -1,6 +1,6 @@
 package com.devxpress;
 
-public class BST<T extends Comparable> {
+public class BST<T extends Comparable<T>> {
 
     private final Node<T> root;
 
@@ -19,7 +19,7 @@ public class BST<T extends Comparable> {
                 '}';
     }
 
-    public static class Node<T extends Comparable> {
+    public static class Node<T extends Comparable<T>> {
         private final T data;
         private Node<T> left = null;
         private Node<T> right = null;

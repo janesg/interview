@@ -64,7 +64,7 @@ public class BSTTest {
         bstJavaScript("testBST");
     }
 
-    public static Void bstJavaScript(String functionName) throws Exception {
+    private static Void bstJavaScript(String functionName) throws Exception {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");

@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class LinkedListTest {
 
     @Test
-    public void emptyList() throws Exception {
+    public void emptyList() {
         LinkedList<String> linked = new LinkedList<>();
 
         assertEquals(0, linked.size());
@@ -25,7 +25,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void singleItemList() throws Exception {
+    public void singleItemList() {
         LinkedList<String> linked = new LinkedList<>();
 
         assertEquals(0, linked.size());
@@ -41,7 +41,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void addFirstLastClear() throws Exception {
+    public void addFirstLastClear() {
         LinkedList<String> linked = new LinkedList<>();
 
         assertEquals(0, linked.size());
@@ -59,7 +59,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void removeFirst() throws Exception {
+    public void removeFirst() {
         LinkedList<String> linked = new LinkedList<>();
 
         linked.addFirst("Three");
@@ -74,7 +74,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void removeLast() throws Exception {
+    public void removeLast() {
         LinkedList<String> linked = new LinkedList<>();
 
         linked.addFirst("Three");
@@ -89,7 +89,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void addLast() throws Exception {
+    public void addLast() {
         LinkedList<String> linked = new LinkedList<>();
 
         assertEquals(0, linked.size());
@@ -111,7 +111,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void get() throws Exception {
+    public void get() {
         LinkedList<String> linked = new LinkedList<>();
 
         try {
@@ -152,7 +152,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void remove() throws Exception {
+    public void remove() {
         LinkedList<String> linked = new LinkedList<>();
 
         try {
@@ -198,7 +198,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void add() throws Exception {
+    public void add() {
         LinkedList<String> linked = new LinkedList<>();
 
         try {
@@ -230,7 +230,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void forEach() throws Exception {
+    public void forEach() {
         LinkedList<String> linked = new LinkedList<>();
 
         linked.addLast("Whelks");
@@ -248,7 +248,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void mid() throws Exception {
+    public void mid() {
         LinkedList<String> linked = new LinkedList<>();
 
         assertNull(linked.mid());
@@ -265,7 +265,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void isCircular() throws Exception {
+    public void isCircular() {
         LinkedList<String> linked = new LinkedList<>();
 
         assertFalse(linked.isCircular());
@@ -280,7 +280,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void fromLast() throws Exception {
+    public void fromLast() {
         LinkedList<String> linked = new LinkedList<>();
 
         try {
@@ -311,7 +311,7 @@ public class LinkedListTest {
         linkedListJavaScript("testLinkedList");
     }
 
-    public static String linkedListJavaScript(String functionName) throws Exception {
+    private static String linkedListJavaScript(String functionName) throws Exception {
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
