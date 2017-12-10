@@ -46,25 +46,55 @@ Sort.prototype.selectionSort = function(arr) {
 };
 
 Sort.prototype.mergeSort = function(arr) {
+    if (arr.length === 1) {
+        return arr;
+    }
+
+    var mid = Math.floor(arr.length / 2);
+
+    // Slice doesn't work on Java arrays so use for loop copy instead
+    // http://forum.imagej.net/t/the-js-array-slice-function-doesnt-work-anymore-with-java-8/764/7
+    // var left = arr.slice(0, mid);
+    // var right = arr.slice(mid);
+    var left = [];
+    var right = [];
+
     for (var i = 0; i < arr.length; i++) {
-        var indexOfMin = i;
+        (i < mid ? left : right).push(arr[i]);
+    }
 
-        for (var j = i + 1; j < arr.length; j++) {
-            if (arr[j] < arr[indexOfMin]) {
-                indexOfMin = j;
-            }
-        }
+    var result = mergeHalves(this.mergeSort(left), this.mergeSort(right));
+    print(JSON.stringify(result));
+    return result;
+    // return mergeHalves(this.mergeSort(left), this.mergeSort(right));
+}
 
-        // If the assumed minimum isn't actual minimum then swap elements
-        if (i != indexOfMin) {
-            var temp = arr[indexOfMin];
-            arr[indexOfMin] = arr[i];
-            arr[i] = temp;
+// Take 2 sorted arrays and merge to form 1 sorted array
+function mergeHalves(left, right) {
+    var result = [];
+
+    // 'Move' lowest value first element into result array
+    while (left.length && right.length) {
+        // result.push((left[0] < right[0] ? left : right).shift());
+        if (left[0] < right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
         }
     }
 
-    return arr;
-};
+    // In ES6 use the spread operator
+    // return [...result, ...left, ...right];
+
+    // Different ways of adding all remaining elements
+
+    // (left.length ? right : left).forEach(function(e) { result.push(e) });
+    // return result;
+
+    // return result.concat(left).concat(right);
+
+    return result.concat(left.length ? right : left);
+}
 
 function testBubbleSort(arr) {
     return new Sort().bubbleSort(arr);
