@@ -1,11 +1,14 @@
 # interview
-A repository for technical interview questions and exercises
+
+Exercises and soultions for 2 Udemy courses:
 
 Courses:
-- 
+-
 - Java Interview Guide : 200+ Interview Questions and Answers
+    - https://www.udemy.com/java-interview-questions-and-answers/
 
 - The Coding Interview Bootcamp: Algorithms + Data Structures
+    - https://www.udemy.com/coding-interview-bootcamp-algorithms-and-data-structure/
 
 Issues:
 - 
